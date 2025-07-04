@@ -1,11 +1,24 @@
 import './App.css';
-import Button from 'react-bootstrap/Button';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import Home from './pages/Home';
 
 function App() {
   return (
-    <>
-    <h1>Welcome to Helperly</h1>
-    </>
+
+    <Router>
+      <Header/>
+      <Routes>
+        <Route path='/' element={<Home/>} />
+      </Routes>
+      
+      <Footer/>
+    </Router>
+    
+
   );
 }
 
