@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import UserDashboard from "./pages/UserDashboard";
 
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
 
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/userDashboard" element={<UserDashboard />} />
+
 
       </Routes>
 
