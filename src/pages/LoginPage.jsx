@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 // import dummyUsers from "../Database/dummyCustomers.json";
 import axios from "axios";
 
+const api = axios.create({
+  baseURL: process.env.REACT_APP_API_BASE_URL
+});
+
 const LoginPage = () => {
   const [isRegister, setIsRegister] = useState(false);
   const [form, setForm] = useState({
@@ -41,7 +45,7 @@ const LoginPage = () => {
       }
 
       try {
-        const res = await axios.post("http://localhost:8080/addUser", {
+        const res = await api.post("http://localhost:8080/api/auth/register", {
           name: form.name,
           email: form.emailId,
           password: form.customersPassword,
@@ -72,7 +76,7 @@ const LoginPage = () => {
 
     else {
       try {
-        const res = await axios.post("http://localhost:8080/api/auth/login", {
+        const res = await api.post("http://localhost:8080/api/auth/login", {
           email: form.emailId,
           password: form.customersPassword,
         });
