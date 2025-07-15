@@ -1,12 +1,28 @@
-import { useState } from 'react'
+import { useContext, useState, useRef, useEffect } from 'react'
 
 import { Navbar, Nav, Container, Button, NavDropdown } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 // import LoginModal from "./LoginModal";
+import { AuthContext } from '../context/AuthContext';
 
 
 function Header() {
-    const [showLogin, setShowLogin] = useState(false);
+    const { authData, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const dropdownRef = useRef();
+    const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     return (
         <Navbar bg="light" expand="lg" sticky="top" className="shadow-sm">
@@ -54,18 +70,43 @@ function Header() {
                         <Nav.Link href="/contact">Contact</Nav.Link>
                     </Nav>
 
-                    <div className="d-flex gap-2">
-                        <Button variant="outline-dark" href="/login">Login</Button>
+                    {authData ? (
+                        // <>
+                        //     <span style={{ marginLeft: '10px' }}>👤 {authData.email}</span>
+                        //     <button onClick={logout}>Logout 🔓</button>
+                        // </>
 
-                        {/* <button className="btn btn-outline-dark" onClick={() => setShowLogin(true)}>
-                                Login
-                            </button>
+                        <div className="position-relative" ref={dropdownRef}>
+                            <div
+                                className="rounded-circle bg-light text-white d-flex align-items-center justify-content-center"
+                                style={{ width: '40px', height: '40px', cursor: 'pointer' }}
+                                onClick={toggleDropdown}
+                                title="Profile"
+                            >   👤
+                                {/* {authData.email.charAt(0).toUpperCase()} */}
+                            </div>
 
-                            <LoginModal show={showLogin} handleClose={() => setShowLogin(false)} /> */}
+                            {dropdownOpen && (
+                                <div className="position-absolute end-0 mt-2 bg-white shadow rounded p-2" style={{ minWidth: '180px', zIndex: 1000 }}>
+                                    <div className="small text-muted mb-1">Logged in as</div>
+                                    <div className="fw-semibold mb-2">{authData.email}</div>
+                                    <button className="btn btn-sm btn-outline-danger w-100" onClick={logout}>
+                                        Logout
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+
+                    ) : (
+
+                        <div className="d-flex gap-2">
+                            <Button variant="outline-dark" href="/login">Login</Button>
+                            <Button variant="dark" href="/register-helper">Become a Helper</Button>
+                        </div>
+
+                    )}
 
 
-                        <Button variant="dark" href="/register-helper">Become a Helper</Button>
-                    </div>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Container, Row, Col, Button, Form, Card, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 // import dummyUsers from "../Database/dummyCustomers.json";
 import axios from "axios";
+
+import { AuthContext } from '../context/AuthContext';
+
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL
@@ -10,6 +13,10 @@ const api = axios.create({
 
 const LoginPage = () => {
   const [isRegister, setIsRegister] = useState(false);
+  const { } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
+
+
   const [form, setForm] = useState({
     name: "",
     emailId: "",
@@ -17,21 +24,12 @@ const LoginPage = () => {
     confirmPassword: "",
     customerContactNo: ""
   });
-  const [user, setUser] = useState(null);
+  
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
-
-  //   const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-
-  // };
-
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,7 +54,7 @@ const LoginPage = () => {
         // console.log("Status Code:", res.status);        // e.g., 200 or 201
         // console.log("Response Data:", res.data);        // Server response (e.g., user info or success message)
 
-        navigate("/login")
+        navigate("/auth/api/login")
 
         alert("Registration successful. You can now login.");
         setIsRegister(false);
@@ -82,13 +80,19 @@ const LoginPage = () => {
         });
 
         const userData = res.data;
+        console.log(userData);
+        login({
+          token: userData.body.token,
+          userId: userData.body.userId,
+          email: userData.body.email,
+        });
 
         // Save user in localStorage or global state
-        localStorage.setItem("user", JSON.stringify(userData));
-        setUser(userData);
+        // localStorage.setItem("authData", JSON.stringify(userData));
+        // setUser(userData);
 
         // Redirect to dashboard
-        navigate("/userDashboard");
+        navigate("/");
       } catch (err) {
         setError("Invalid email or password");
       }

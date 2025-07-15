@@ -10,10 +10,12 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import UserDashboard from "./pages/UserDashboard";
 
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
 
+    <AuthProvider>
     <Router>
       <Header />
       <Routes>
@@ -23,12 +25,11 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/userDashboard" element={<UserDashboard />} />
-
-
+        
       </Routes>
-
       <Footer />
     </Router>
+    </AuthProvider>
 
 
   );
