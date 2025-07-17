@@ -1,21 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { Container, Row, Col, Button, Form, Card, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-// import dummyUsers from "../Database/dummyCustomers.json";
-import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
+import useAuthAxios from "../api/useAuthAxios";
 
-import { AuthContext } from '../context/AuthContext';
-
-
-const api = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL
-});
 
 const LoginPage = () => {
   const [isRegister, setIsRegister] = useState(false);
-  const { } = useContext(AuthContext);
   const { login } = useContext(AuthContext);
-
+  const api = useAuthAxios();
 
   const [form, setForm] = useState({
     name: "",
@@ -43,7 +36,7 @@ const LoginPage = () => {
       }
 
       try {
-        const res = await api.post("http://localhost:8080/api/auth/register", {
+        const res = await api.post("/api/auth/register", {
           name: form.name,
           email: form.emailId,
           password: form.customersPassword,
@@ -74,7 +67,7 @@ const LoginPage = () => {
 
     else {
       try {
-        const res = await api.post("http://localhost:8080/api/auth/login", {
+        const res = await api.post("/api/auth/login", {
           email: form.emailId,
           password: form.customersPassword,
         });

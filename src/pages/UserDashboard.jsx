@@ -1,32 +1,36 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Tabs, Tab, Card, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+// import axios from 'axios';
+// import { AuthContext } from '../context/AuthContext';
+import useAuthAxios from '../api/useAuthAxios';
 
-import axios from 'axios';
-import { AuthContext } from '../context/AuthContext';
-
-const api = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL
-});
+// const api = axios.create({
+//   baseURL: process.env.REACT_APP_API_BASE_URL
+// });
 
 function UserDashboard() {
   const [user, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { authData } = useContext(AuthContext);
+  // const { authData } = useContext(AuthContext);
+
+  const authAxios = useAuthAxios();
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
 
-        console.log(authData.token);
-        const response = await axios.get('http://localhost:8080/user/userInfo', {
-          headers: {
-            Authorization: `Bearer ${authData.token}`
-          }
-        });
+        const response = await authAxios.get("/user/userInfo");
 
-        console.log(response.data)
+        // console.log(authData.token);
+        // const response = await axios.get('http://localhost:8080/user/userInfo', {
+        //   headers: {
+        //     Authorization: `Bearer ${authData.token}`
+        //   }
+        // });
+
+        // console.log(response.data)
         setUserData(response.data);
       } catch (err) {
         console.error('Error fetching user info:', err);
