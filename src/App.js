@@ -12,6 +12,8 @@ import UserDashboard from "./pages/UserDashboard";
 
 import { AuthProvider } from './context/AuthContext';
 import RegisterHelper from './pages/RegisterHelper';
+import ShowAllServices from './pages/ShowAllServices';
+import HelpersByCategory from './pages/HelpersBycategory';
 
 function App() {
   return (
@@ -27,7 +29,9 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/userDashboard" element={<UserDashboard />} />
         
+        <Route path="/all-services" element={<ShowAllServices/>} />
         <Route path="/register-helper" element={<RegisterHelper/>} />
+        <Route path="/helpers/category" element={<HelpersByCategory/>}/>
 
       </Routes>
       <Footer />

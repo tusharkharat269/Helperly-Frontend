@@ -17,7 +17,7 @@ const Home = () => {
               <p className="text-secondary fs-5">
                 Book plumbers, electricians, mechanics, and more with ease — all in one place.
               </p>
-              <Button variant="dark" size="lg" href="/services">
+              <Button variant="dark" size="lg" href="/all-services">
                 Explore Services
               </Button>
             </Col>
@@ -106,7 +106,7 @@ const Home = () => {
         <Container>
           <h2 className="mb-3">Ready to get started?</h2>
           <p className="mb-4 fs-5">Join thousands of users who trust Helperly for home services.</p>
-          <Button variant="light" size="lg" href="/register">
+          <Button variant="light" size="lg" href="/login">
             Book Your First Service
           </Button>
         </Container>
