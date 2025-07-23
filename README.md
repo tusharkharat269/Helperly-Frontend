@@ -1,26 +1,52 @@
-# Getting Started with Create React App
+# 🌐 Helperly Frontend
 
-## Available Scripts
+This is the React-based frontend for **Helperly**, a home service booking platform where users can discover, book, and manage appointments with service professionals (electricians, plumbers, etc.).
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React**
+- **React Router DOM**
+- **React Bootstrap**
+- **Axios**
+- **Lucide Icons**
+- **JWT** for token-based auth
+- **LocalStorage** for session
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🧩 Features
 
-Launches the test runner in the interactive watch mode.\
+- 🔐 Login/Register with JWT
+- 📁 User Dashboard with:
+  - Profile info
+  - Bookings
+- 🛠️ Service browsing by categories
+- 🔎 Dynamic routing for service details
+- 📞 Contact and About Us pages
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📁 Folder Structure
+frontend/
+├── public/
+├── src/
+│ ├── components/ # Shared components like Navbar, Cards
+│ ├── pages/ # Route-level pages like Login, Dashboard
+│ ├── services/ # Axios API services
+│ └── App.js # Main routing and layout
+├── .env
+└── package.json
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+
+
+---
+
+## 🔧 Setup Instructions
+
+```bash
+cd frontend
+npm install
+npm start
 

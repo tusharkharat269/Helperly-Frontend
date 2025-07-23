@@ -33,11 +33,11 @@ const ShowAllServices = () => {
   const handleViewHelpers = async (category) => {
   try {
     // Optional: prefetch helpers (not necessary if fetching on target page)
-    const res = await api.get(`/api/helpers/category/${category}`);
-    console.log('Fetched Helpers:', res.data); // Optional debug
+    // const res = await api.get(`/api/helpers/category/${category}`);
+    // console.log('Fetched Helpers:', res.data); // Optional debug
 
     // Navigate to the helpers page with query param
-    navigate(`/helpers?category=${category}`);
+    navigate(`/helpers/category/${category}`);
   } catch (err) {
     console.error('Error fetching helpers:', err);
   }

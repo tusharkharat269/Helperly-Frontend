@@ -31,7 +31,7 @@ function App() {
         
         <Route path="/all-services" element={<ShowAllServices/>} />
         <Route path="/register-helper" element={<RegisterHelper/>} />
-        <Route path="/helpers/category" element={<HelpersByCategory/>}/>
+        <Route path="/helpers/category/:category" element={<HelpersByCategory />} />
 
       </Routes>
       <Footer />
